@@ -37,16 +37,27 @@ var drawLine = function() {
 var drawCircle = function() {
   // This method initializes the circle
   context.beginPath();
+  // beginPath() seperates lines from each other
   // context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
   // first two numbers are the coordinates
   context.arc(95,50,40,0,2*Math.PI);
   context.stroke();
+};
+
+var createHalfGradient = function() {
+  var grid = context.createLinearGradient(0, 0, 200, 0);
+  grid.addColorStop(0, '#FFA000');
+  grid.addColorStop(1, '#FFECB3');
+
+  context.fillStyle = grid;
+  context.fillRect(10, 10, 150, 80);
 };
 ////////////////////////////////////// END FUNCTIONS
 
   createBox();
   drawLine();
   drawCircle();
+  createHalfGradient();
 
 });
 
