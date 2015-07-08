@@ -6,7 +6,7 @@ $(document).ready(function() {
   var context = canvas.getContext("2d");
 
 
-// DEFINE FUNCTION STEPS FOR DRAWING HERE
+////////////////////// DEFINE FUNCTION STEPS FOR DRAWING HERE
 var createBox = function() {
  // What color are you drawing with the Canvas?
  // // the fillStyle property can be a CSS color, gradient, or pattern
@@ -30,12 +30,23 @@ var drawLine = function() {
   context.lineTo(80, 40);
   // stroke actually draws the line with the coordinates specified
   // by moveTo and lineTo
+  context.strokeStyle="#009688";
   context.stroke();
 };
-// END FUNCTIONS
+
+var drawCircle = function() {
+  // This method initializes the circle
+  context.beginPath();
+  // context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+  // first two numbers are the coordinates
+  context.arc(95,50,40,0,2*Math.PI);
+  context.stroke();
+};
+////////////////////////////////////// END FUNCTIONS
 
   createBox();
   drawLine();
+  drawCircle();
 
 });
 
