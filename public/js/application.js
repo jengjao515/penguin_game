@@ -67,13 +67,20 @@ var createCircleGradient = function() {
   context.fillStyle = grid;
   context.fillRect(10,10,150,80);
 };
+
+var showFont = function() {
+  context.font = "10px Helvetica";
+  // fillText ==> 'Fills the specified text with color'
+  context.fillText("Pantheon", 10, 10);
+};
 ////////////////////////////////////// END FUNCTIONS
 
-  createBox();
-  drawLine();
-  drawCircle();
-  createHalfGradient();
-  createCircleGradient();
+  // createBox();
+  // drawLine();
+  // drawCircle();
+  // createHalfGradient();
+  // createCircleGradient();
+  showFont();
 
 });
 
