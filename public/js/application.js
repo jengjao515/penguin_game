@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  // x and y coordinates aren't pixels
  // Step One: Bind to the canvas element
   var canvas = document.getElementById("testcanvas");
 // // Step Two: Create what will draw on the canvas ( the drawing object)
@@ -45,12 +46,26 @@ var drawCircle = function() {
 };
 
 var createHalfGradient = function() {
+  // createLinearGradient(x,y,x1,y1)
   var grid = context.createLinearGradient(0, 0, 200, 0);
+  // addColorStop specifies where along the gradient the colors
+  // should start and stop, the integer can only be between 0 and 1
   grid.addColorStop(0, '#FFA000');
   grid.addColorStop(1, '#FFECB3');
 
   context.fillStyle = grid;
-  context.fillRect(10, 10, 150, 80);
+  context.fillRect(80, 80, 150, 80);
+};
+
+var createCircleGradient = function() {
+  // createRadialGradient(x,y,r,x1,y1,r1)
+  var grid = context.createRadialGradient(75,50,5,90,60,100);
+
+  grid.addColorStop(0, '#FFA000');
+  grid.addColorStop(1, '#FFECB3');
+
+  context.fillStyle = grid;
+  context.fillRect(10,10,150,80);
 };
 ////////////////////////////////////// END FUNCTIONS
 
@@ -58,6 +73,7 @@ var createHalfGradient = function() {
   drawLine();
   drawCircle();
   createHalfGradient();
+  createCircleGradient();
 
 });
 
