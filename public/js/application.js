@@ -1,14 +1,18 @@
 $(document).ready(function() {
   var canvas = document.getElementById("game");
+  canvas.width = 800;
+  canvas.height = 600;
+  // canvas.style.width = '800px';
+  // canvas.style.height = '600px';
   var context = canvas.getContext("2d");
 
 ///////////// CANVAS BACKGROUND //////////
-var backgroundReady = false;
-var backgroundImage = new Image();
-backgroundImage.onload = function() {
-  backgroundReady = true;
-};
-backgroundImage.src = "../auroraback.jpg";
+// var backgroundReady = false;
+// var backgroundImage = new Image();
+// backgroundImage.onload = function() {
+//   backgroundReady = true;
+// };
+// backgroundImage.src = "../auroraback.jpg";
 
 ///////////// PENGUIN CODE ////////////
 var penguinReady = false;
@@ -59,9 +63,9 @@ var reset = function() {
 
 //////////// JS drawing images onto the Canvas /////
 var render = function() {
-  if (backgroundReady) {
-    context.drawImage(backgroundImage, 0, 0);
-  };
+  // if (backgroundReady) {
+  //   context.drawImage(backgroundImage, 0, 0);
+  // };
   if (penguinReady) {
     context.drawImage(penguinImage, penguin.x, penguin.y);
   };
