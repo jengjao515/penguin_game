@@ -1,17 +1,18 @@
 body {
+  background-color: #000000;
   margin: 0;
 }
 
 h1 {
-  color:#000000;
+  color:#FFFFFF;
   font-family: helvetica;
   font-size: 20px;
   text-align:center;
+  text-transform: uppercase;
 }
 
 .game-canvas {
-  background-color: #727272;
-  border-radius: 20px;
+  background-color: #FFFFFF;
   display: block;
   margin: auto;
 }
