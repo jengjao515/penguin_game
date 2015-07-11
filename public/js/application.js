@@ -6,17 +6,24 @@ $(document).ready(function() {
   var canvas = document.getElementById("game");
   canvas.width = 500;
   canvas.height = 500;
-  canvas.style.width = '800px';
-  canvas.style.height = '600px';
+  // canvas.style.width = '800px';
+  // canvas.style.height = '600px';
   var context = canvas.getContext("2d");
-////////////////// PENGUIN OBJECT
+////////////////// BACKGROUND AND OBJECTS
+  var bgReady = false;
+  var bgImage = new Image();
+  bgImage.onload = function() {
+    bgReady = true;
+  };
+  bgImage.src = "auroraback.jpg"
+
   var penguinReady = false;
   var penguinImage = new Image();
-  penguinReady.onload = function() {
-    penguinReady = true
+  penguinImage.onload = function() {
+    penguinReady = true;
   };
-  penguinImage.src = "../penguin.png";
-  console.log(penguinImage);
+  penguinImage.src = "penguin.png";
+
   var penguin = {
     speed: 256,
     x: 0,
@@ -48,6 +55,10 @@ $(document).ready(function() {
   };
 ////////////////// DRAWS THE GAME ONTO CANVAS
   var render = function () {
+    if (bgReady) {
+      context.drawImage(bgImage, 0, 0);
+    };
+
     if (penguinReady) {
       context.drawImage(penguinImage, penguin.x, penguin.y);
     }
