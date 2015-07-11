@@ -24,8 +24,20 @@ $(document).ready(function() {
   };
   penguinImage.src = "penguin.png";
 
+  var snowballReady = false;
+  var snowballImage = new Image();
+  snowballImage.onload = function() {
+    snowballReady = true;
+  };
+   snowballImage.src = "snowball.gif";
+
   var penguin = {
     speed: 256,
+    x: 0,
+    y: 0
+  };
+
+  var snowball = {
     x: 0,
     y: 0
   };
@@ -62,6 +74,10 @@ $(document).ready(function() {
     if (penguinReady) {
       context.drawImage(penguinImage, penguin.x, penguin.y);
     }
+
+    if (snowballReady) {
+      context.drawImage(snowballImage, 5, 5);
+  }
   };
 ////////////////// HOW TO LOOP THE GAME
   var main = function () {
