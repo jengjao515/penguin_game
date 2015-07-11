@@ -9,6 +9,20 @@ $(document).ready(function() {
   // canvas.style.width = '800px';
   // canvas.style.height = '600px';
   var context = canvas.getContext("2d");
+
+////////////////// DEFINING SPRITE OBJECTS
+var sprite = function(url, pos, size, speed, frames, dir, once) {
+  this.pos = pos; // the x and y coordinate in the image for this sprite
+  this.size = size; // size of the sprite (just one keyframe)
+  this.speed = typeof speed === 'number' ? speed : 0; // speed in frames/sec for animating
+  this.frames = frames; //an array of frame indexes for animating: [0, 1, 2, 1]
+  this._index = 0;
+  this.url = url; // the path to the image for this sprite
+  this.dir = dir || 'horizontal'; // which direction to move in the sprite map when animating: 'horizontal' (default) or 'vertical'
+  this.once = once; // true to only run the animation once, defaults to false
+};
+
+
 ////////////////// BACKGROUND AND OBJECTS
   var bgReady = false;
   var bgImage = new Image();
@@ -24,6 +38,13 @@ $(document).ready(function() {
   };
   penguinImage.src = "penguin.png";
 
+  var penguin = {
+    speed: 256,
+    x: 0,
+    y: 0
+  };
+
+////////////////// MANAGING SNOWBALL MOVEMENTS
   var snowballReady = false;
   var snowballImage = new Image();
   snowballImage.onload = function() {
@@ -31,16 +52,11 @@ $(document).ready(function() {
   };
    snowballImage.src = "snowball.gif";
 
-  var penguin = {
-    speed: 256,
-    x: 0,
-    y: 0
-  };
-
   var snowball = {
     x: 0,
     y: 0
   };
+
 ////////////////// KEY/UPDATE FUNCTIONS
   var keysDown = {};
   addEventListener("keydown", function (event) {
