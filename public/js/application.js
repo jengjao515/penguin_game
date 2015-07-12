@@ -69,6 +69,16 @@ $(document).ready(function() {
     if (39 in keysDown) { // Player holding right
       penguin.x += penguin.speed * modifier;
     }
+
+    if (
+      penguin.x <= (snowball.x + 32)
+      && snowball.x <= (penguin.x + 32)
+      && penguin.y <= (snowball.y + 32)
+      && snowball.y <= (penguin.y + 32)
+    ) {
+        reset();
+      }
+
   };
 ////////////////// DRAWS THE GAME ONTO CANVAS
   var render = function () {
@@ -81,7 +91,7 @@ $(document).ready(function() {
     }
 
     if (snowballReady) {
-      context.drawImage(snowballImage, 5, 5);
+      context.drawImage(snowballImage, snowball.x, snowball.y);
   }
   };
 ////////////////// HOW TO LOOP THE GAME
