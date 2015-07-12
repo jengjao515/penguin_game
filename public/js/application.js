@@ -10,17 +10,6 @@ $(document).ready(function() {
   // canvas.style.height = '600px';
   var context = canvas.getContext("2d");
 
-////////////////// DEFINING SPRITE OBJECTS
-var sprite = function(url, pos, size, speed, frames, dir, once) {
-  this.pos = pos; // the x and y coordinate in the image for this sprite
-  this.size = size; // size of the sprite (just one keyframe)
-  this.speed = typeof speed === 'number' ? speed : 0; // speed in frames/sec for animating
-  this.frames = frames; //an array of frame indexes for animating: [0, 1, 2, 1]
-  this._index = 0;
-  this.url = url; // the path to the image for this sprite
-  this.dir = dir || 'horizontal'; // which direction to move in the sprite map when animating: 'horizontal' (default) or 'vertical'
-  this.once = once; // true to only run the animation once, defaults to false
-};
 
 
 ////////////////// BACKGROUND AND OBJECTS
@@ -29,7 +18,7 @@ var sprite = function(url, pos, size, speed, frames, dir, once) {
   bgImage.onload = function() {
     bgReady = true;
   };
-  bgImage.src = "auroraback.jpg"
+  bgImage.src = "snow.jpg"
 
   var penguinReady = false;
   var penguinImage = new Image();
@@ -110,6 +99,10 @@ var sprite = function(url, pos, size, speed, frames, dir, once) {
   var reset = function () {
     penguin.x = canvas.width / 2;
     penguin.y = canvas.height / 2;
+
+    snowball.x = 32 + (Math.random() * (canvas.width - 64));
+    snowball.y = 32 + (Math.random() * (canvas.height - 64));
+
   };
 ////////////////// RUN THE GAME
   var then = Date.now();
