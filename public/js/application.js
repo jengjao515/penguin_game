@@ -1,50 +1,47 @@
 $(document).ready(function() {
-// Cross-browser support for requestAnimationFrame
+// Cross-browser support for requestAnimationFrame ============
+
   var w = window;
   requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
-////////////////// DEFINING THE CANVAS AND DIMENSIONS
+
+// DEFINING THE CANVAS AND DIMENSIONS =========================
+
   var canvas = document.getElementById("game");
   canvas.width = 500;
   canvas.height = 500;
-  // canvas.style.width = '800px';
-  // canvas.style.height = '600px';
   var context = canvas.getContext("2d");
 
 
+// BACKGROUND AND OBJECTS =====================================
+var GameObject = function(){ 
+  this.ready = false;
+  this.x = 0;
+  this.y = 0;
+};
 
-////////////////// BACKGROUND AND OBJECTS
-  var bgReady = false;
-  var bgImage = new Image();
-  bgImage.onload = function() {
-    bgReady = true;
-  };
-  bgImage.src = "snow.jpg"
+GameObject.prototype.image = function(imageSrc) { 
+  this.image = new Image();
+  this.image.src = imageSrc;
+};
 
-  var penguinReady = false;
-  var penguinImage = new Image();
-  penguinImage.onload = function() {
-    penguinReady = true;
-  };
-  penguinImage.src = "penguin.png";
+GameObject.prototype.onload = function() { 
+  this.ready = true;
+};
 
-  var penguin = {
-    speed: 256,
-    x: 0,
-    y: 0
-  };
+var background = new GameObject();
+background.image("snow.jpg");
 
-////////////////// MANAGING SNOWBALL MOVEMENTS
-  var snowballReady = false;
-  var snowballImage = new Image();
-  snowballImage.onload = function() {
-    snowballReady = true;
-  };
-   snowballImage.src = "snowball.gif";
+var penguin = new GameObject();
+penguin.image("penguin.png");
+penguin.speed = 500;
 
-  var snowball = {
-    x: 0,
-    y: 0
-  };
+var snowball = new GameObject();
+snowball.image("snowball.gif");
+
+var objects = [background, penguin, snowball];
+for(var i=0; i < objects.length; i++) { 
+  objects[i].onload();
+};
 
 ////////////////// KEY/UPDATE FUNCTIONS
   var keysDown = {};
@@ -56,50 +53,50 @@ $(document).ready(function() {
    delete keysDown[event.keyCode];
   }, false);
 
-  var update = function (modifier) {
-    if (38 in keysDown) { // Player holding up
-      penguin.y -= penguin.speed * modifier;
-    }
-    if (40 in keysDown) { // Player holding down
-      penguin.y += penguin.speed * modifier;
-    }
-    if (37 in keysDown) { // Player holding left
-      penguin.x -= penguin.speed * modifier;
-    }
-    if (39 in keysDown) { // Player holding right
-      penguin.x += penguin.speed * modifier;
-    }
+  // var update = function (modifier) {
+  //   if (38 in keysDown) { // Player holding up
+  //     penguin.y -= penguin.speed * modifier;
+  //   }
+  //   if (40 in keysDown) { // Player holding down
+  //     penguin.y += penguin.speed * modifier;
+  //   }
+  //   if (37 in keysDown) { // Player holding left
+  //     penguin.x -= penguin.speed * modifier;
+  //   }
+  //   if (39 in keysDown) { // Player holding right
+  //     penguin.x += penguin.speed * modifier;
+  //   }
 
-    if (
-      penguin.x <= (snowball.x + 32)
-      && snowball.x <= (penguin.x + 32)
-      && penguin.y <= (snowball.y + 32)
-      && snowball.y <= (penguin.y + 32)
-    ) {
-        reset();
-      }
+  //   if (
+  //     penguin.x <= (snowball.x + 32)
+  //     && snowball.x <= (penguin.x + 32)
+  //     && penguin.y <= (snowball.y + 32)
+  //     && snowball.y <= (penguin.y + 32)
+  //   ) {
+  //       reset();
+  //     }
 
-  };
+  // };
 ////////////////// DRAWS THE GAME ONTO CANVAS
   var render = function () {
-    if (bgReady) {
-      context.drawImage(bgImage, 0, 0);
+    if (background.ready) {
+      context.drawImage(background.image, 0, 0);
     };
 
-    if (penguinReady) {
-      context.drawImage(penguinImage, penguin.x, penguin.y);
-    }
+    if (penguin.ready) {
+      context.drawImage(penguin.image, 0, 0);
+    };
 
-    if (snowballReady) {
+    if (snowball.ready) {
       context.drawImage(snowballImage, snowball.x, snowball.y);
-  }
+    };
   };
 ////////////////// HOW TO LOOP THE GAME
   var main = function () {
     var now = Date.now();
     var delta = now - then;
 
-    update(delta / 1000);
+    // update(delta / 1000);
     render();
 
     then = now;
@@ -107,11 +104,11 @@ $(document).ready(function() {
   };
 ////////////////// RESET THE PENGUIN'S POSITION
   var reset = function () {
-    penguin.x = canvas.width / 2;
-    penguin.y = canvas.height / 2;
+    // penguin.x = canvas.width / 2;
+    // penguin.y = canvas.height / 2;
 
-    snowball.x = 32 + (Math.random() * (canvas.width - 64));
-    snowball.y = 32 + (Math.random() * (canvas.height - 64));
+    // snowball.x = 32 + (Math.random() * (canvas.width - 64));
+    // snowball.y = 32 + (Math.random() * (canvas.height - 64));
 
   };
 ////////////////// RUN THE GAME
