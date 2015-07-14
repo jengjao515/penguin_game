@@ -41,8 +41,6 @@ $(document).ready(function() {
   var penguin = new GameObject();
   penguin.image("penguin.png");
   penguin.speed = 200;
-  penguin.y = canvas.height / 2
-  penguin.x = canvas.width / 2
 
   var snowball = new GameObject();
   snowball.image("snowball.gif");
@@ -66,7 +64,7 @@ $(document).ready(function() {
 
 // BIND PENGUIN TO KEYS =======================================
 
-  var update = function (modifier) {
+  var update = function(modifier) {
     if (38 in keysDown) { 
       penguin.y -= penguin.speed * modifier;
     }
@@ -88,15 +86,23 @@ $(document).ready(function() {
       && penguin.y <= (snowball.y + 32)
       && snowball.y <= (penguin.y + 32)
       ) {
-        reset();
+        newSnowball();
       }
   };
 
-// RESET SNOWBALL POSITION ================================
+// CREATE NEW SNOWBALL ======================================
 
-  var reset = function () {
+  var newSnowball = function() {
     snowball.x = 32 + (Math.random() * (canvas.width - 64));
     snowball.y = 32 + (Math.random() * (canvas.height - 64));
+  };
+
+// NEW GAME, RESET PENGUIN ==================================
+  
+  var reset = function() {
+    penguin.x = canvas.width / 2;
+    penguin.y = canvas.height / 2;
+    newSnowball();
   };
 
 // LOOP GAME ================================================
