@@ -14,13 +14,10 @@ $(document).ready(function() {
 
 // GAME OBJECTS ===============================================
 
-  var GameObject = function(){ 
+  var GameObject = function(imageSrc){ 
     this.ready = false;
     this.x = 0;
     this.y = 0;
-  };
-
-  GameObject.prototype.image = function(imageSrc) { 
     this.image = new Image();
     this.image.src = imageSrc;
   };
@@ -35,20 +32,15 @@ $(document).ready(function() {
     }
   };
 
-  var background = new GameObject();
-  background.image("snow.jpg");
-
-  var penguin = new GameObject();
-  penguin.image("penguin.png");
+  var background = new GameObject("snow.jpg");
+  var snowball = new GameObject("snowball.gif");
+  var penguin = new GameObject("penguin.png");
   penguin.speed = 200;
-
-  var snowball = new GameObject();
-  snowball.image("snowball.gif");
 
   var objects = [background, penguin, snowball];
 
   for(var i=0; i < objects.length; i++) { 
-  objects[i].onload();
+    objects[i].onload();
   };
 
 // KEY FUNCTIONS ==============================================
