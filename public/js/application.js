@@ -11,6 +11,7 @@ $(document).ready(function() {
     canvas.height = 400;
   var context = canvas.getContext("2d");
 
+
 // GAME OBJECTS ===============================================
 
   var GameObject = function(imageSrc){
@@ -84,7 +85,7 @@ $(document).ready(function() {
 // HOW TO LOOP GAME =========================================
 
   var main = function() {
-    var now = Date.now();
+    var now = Date.now(); 
     var delta = now - then;
     update(delta / 1000);
     then = now;
@@ -97,11 +98,12 @@ $(document).ready(function() {
       objects[i].onload();
       objects[i].render();
     };
+
   };
 
 // RUN GAME ================================================
 
-  var then = Date.now();
+  var then = Date.now(); // time when the screen first loads
   reset();
   main();
 
